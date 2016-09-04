@@ -10,8 +10,9 @@ This is
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 [![Open Source Love](https://badges.frapsoft.com/os/v3/open-source.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
-#### Shields.io
+### Shields.io
 [![Shields.io](https://img.shields.io/badge/shields.io-ok-green.svg?style=flat)](http://shields.io/)
 
 ### For the Badge
-[![forthebadge](http://forthebadge.com/badges/powered-by-jeff chan.svg)](http://forthebadge.com)
+[![forthebadge](http://forthebadge.com/badges/powered-by-jeff-chan.svg)](http://forthebadge.com)
+
