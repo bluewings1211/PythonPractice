@@ -77,7 +77,7 @@ sudo chmod 600 /etc/kubernetes/ssl/*-key.pem
 sudo chown root:root /etc/kubernetes/ssl/*-key.pem
 
 echo 'Edit installation script'
-sed -i "s/.*export ETCD_ENDPOINTS=.*/export ETCD_ENDPOINTS=https:\/\/$PUBLIC_IPV4:2379/g" /root/coreos-kubernetes/multi-node/generic/controller-install.sh
+sed -i "s/.*export ETCD_ENDPOINTS=.*/export ETCD_ENDPOINTS=http:\/\/$PUBLIC_IPV4:2379/g" /root/coreos-kubernetes/multi-node/generic/controller-install.sh
 
 echo 'Start deploy kubernetes'
 bash /root/coreos-kubernetes/multi-node/generic/controller-install.sh
