@@ -13,20 +13,17 @@ EOF
 
 echo 'Edit installation script'
 sed -i "s/.*export ETCD_ENDPOINTS=.*/export ETCD_ENDPOINTS=http:\/\/$MASTER_IP:2379/g" /root/coreos-kubernetes/multi-node/generic/worker-install.sh
-sed -i "s/.*export CONTROLLER_ENDPOINTS=.*/export CONTROLLER_ENDPOINTS=https:\/\/$MASTER_IP/g" /root/coreos-kubernetes/multi-node/generic/worker-install.sh
+sed -i "s/.*export CONTROLLER_ENDPOINT=.*/export CONTROLLER_ENDPOINT=https:\/\/$MASTER_IP/g" /root/coreos-kubernetes/multi-node/generic/worker-install.sh
 
 
-git clone https://github.com/coreos/coreos-kubernetes.git
-git checkout v0.7.1
+git clone -b 0.7.1 https://github.com/coreos/coreos-kubernetes.git
 mkdir -p /etc/kubernetes/ssl/
 
-### need copy key ###
+echo "### need copy key ###"
 
 sudo chmod 600 /etc/kubernetes/ssl/*-key.pem
 sudo chown root:root /etc/kubernetes/ssl/*-key.pem
 
-bash multi-node/generic/worker-install.sh
-~/kubectl config set-cluster default-cluster --server=https://${MASTER_IP} --certificate-authority=ca.pem
-~/kubectl config set-credentials default-admin --certificate-authority=ca.pem --client-key=admin-key.pem --client-certificate=admin.pem
-~/kubectl config set-context default-system --cluster=default-cluster --user=default-admin
-~/kubectl config use-context default-system
+bash /root/coreos-kubernetes/multi-node/generic/worker-install.sh
+
+
