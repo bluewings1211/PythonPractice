@@ -80,3 +80,16 @@ sed -i "s/.*export ETCD_ENDPOINTS=.*/export ETCD_ENDPOINTS=http:\/\/$PUBLIC_IPV4
 
 echo 'Start deploy kubernetes'
 bash /root/coreos-kubernetes/multi-node/generic/controller-install.sh
+
+echo 'Install kubectl'
+cd ~/
+curl -O https://storage.googleapis.com/kubernetes-release/release/v1.4.3/bin/linux/amd64/kubectl
+chmod +x kubectl
+echo 'Cinfigure kubectl'
+~/kubectl config set-cluster default-cluster --server=https://$PUBLIC_IPV4 --certificate-authority=keys/ca.pem
+~/kubectl config set-credentials default-admin --certificate-authority=keys/ca.pem --client-key=keys/admin-key.pem --client-certificate=keys/admin.pem
+~/kubectl config set-context default-system --cluster=default-cluster --user=default-admin
+~/kubectl config use-context default-system
+
+echo 'Marking Master node be schedulable'
+./kubectl patch node $PUBLIC_IPV4 -p '{"spec":{"unschedulable":false}}'
