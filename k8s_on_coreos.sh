@@ -1,16 +1,17 @@
 #!/bin/sh
 
-git clone -b v0.7.1 https://github.com/coreos/coreos-kubernetes.git
-PRIVATE_IPV4=$1
+BRANCH_VERSION=$1
 PUBLIC_IPV4=$2
 
-echo "PRIVATE_IPV4: $1"
+git clone -b $BRANCH_VERSION https://github.com/coreos/coreos-kubernetes.git
+
+echo "BRANCH_VERSION: $1"
 echo "PUBLIC_IPV4: $2"
 
 echo 'Edit environment varible'
 touch /etc/environment
 cat << EOF > /etc/environment
-COREOS_PRIVATE_IPV4=$PRIVATE_IPV4
+COREOS_PRIVATE_IPV4=$PUBLIC_IPV4
 COREOS_PUBLIC_IPV4=$PUBLIC_IPV4
 EOF
 echo 'Done'
@@ -49,8 +50,6 @@ subjectAltName = @alt_names
 [alt_names]
 DNS.1 = kubernetes
 DNS.2 = kubernetes.default
-DNS.3 = kubernetes.default.svc
-DNS.4 = kubernetes.default.svc.cluster.local
 IP.1 = $PUBLIC_IPV4
 EOF
 echo 'Done'
