@@ -20,7 +20,7 @@ COREOS_PUBLIC_IPV4=$COREOS_IP
 EOF
 
 echo 'Edit installation script'
-sed -i "s/.*export ETCD_ENDPOINT=.*/export ETCD_ENDPOINT=http:\/\/$MASTER_IP:2379/g" /root/coreos-kubernetes/multi-node/generic/worker-install.sh
+sed -i "s/.*export ETCD_ENDPOINTS=.*/export ETCD_ENDPOINTS=http:\/\/$MASTER_IP:2379/g" /root/coreos-kubernetes/multi-node/generic/worker-install.sh
 sed -i "s/.*export CONTROLLER_ENDPOINT=.*/export CONTROLLER_ENDPOINT=https:\/\/$MASTER_IP/g" /root/coreos-kubernetes/multi-node/generic/worker-install.sh
 
 mkdir -p /etc/kubernetes/ssl/
